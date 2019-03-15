@@ -1,25 +1,31 @@
-/*
- * HomePage
- *
- * This is the first thing users see of our App, at the '/' route
- *
- * NOTE: while this component should technically be a stateless functional
- * component (SFC), hot reloading does not currently support SFCs. If hot
- * reloading is not a necessity for you then you can refactor it and remove
- * the linting exception.
- */
-
 import React from 'react';
-import { FormattedMessage } from 'react-intl';
-import messages from './messages';
-
+import Title from '../../components/Title';
+import WatherForm from '../WatherForm';
+import Wather from '../Wather';
 /* eslint-disable react/prefer-stateless-function */
+const apikey = 'bd9180a8272e9b7ee9b7e0856c22b16e';
+
 export default class HomePage extends React.PureComponent {
+  getMyWather = async e => {
+    e.preventDefault();
+    const apiCall = await fetch(
+      `https://api.openweathermap.org/data/2.5/weather?q=London,uk&appid=${apikey}&units=metric`,
+    );
+    const data = await apiCall.json();
+
+    console.log(data);
+    console.log('laba diena');
+  };
+
   render() {
     return (
-      <h1>
-        <FormattedMessage {...messages.header} />
-      </h1>
+      <React.Fragment>
+        <div className="container">
+          <Title />
+          <WatherForm getMyWather={this.getMyWather} />
+          <Wather />
+        </div>
+      </React.Fragment>
     );
   }
 }
