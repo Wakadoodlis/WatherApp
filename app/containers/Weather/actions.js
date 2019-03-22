@@ -1,6 +1,6 @@
 /*
  *
- * Wather actions
+ * Weather actions
  *
  */
 

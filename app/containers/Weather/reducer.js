@@ -1,6 +1,6 @@
 /*
  *
- * Wather reducer
+ * Weather reducer
  *
  */
 
@@ -9,7 +9,7 @@ import { DEFAULT_ACTION } from './constants';
 
 export const initialState = fromJS({});
 
-function watherReducer(state = initialState, action) {
+function weatherReducer(state = initialState, action) {
   switch (action.type) {
     case DEFAULT_ACTION:
       return state;
@@ -18,4 +18,4 @@ function watherReducer(state = initialState, action) {
   }
 }
 
-export default watherReducer;
+export default weatherReducer;

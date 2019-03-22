@@ -6,23 +6,23 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectWather from './selectors';
+import makeSelectWeather from './selectors';
 import reducer from './reducer';
 import saga from './saga';
 
 /* eslint-disable react/prefer-stateless-function */
-export class Wather extends React.PureComponent {
+export class Weather extends React.PureComponent {
   render() {
-    return <div>WATHER</div>;
+    return <div>WEATHER</div>;
   }
 }
 
-Wather.propTypes = {
-  dispatch: PropTypes.func.isRequired,
+Weather.propTypes = {
+  // dispatch: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = createStructuredSelector({
-  wather: makeSelectWather(),
+  weather: makeSelectWeather(),
 });
 
 function mapDispatchToProps(dispatch) {
@@ -36,11 +36,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'wather', reducer });
-const withSaga = injectSaga({ key: 'wather', saga });
+const withReducer = injectReducer({ key: 'weather', reducer });
+const withSaga = injectSaga({ key: 'weather', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(Wather);
+)(Weather);

@@ -1,6 +1,6 @@
 /**
  *
- * Asynchronously loads the component for WatherForm
+ * Asynchronously loads the component for Weather
  *
  */
 

@@ -6,25 +6,29 @@ import { compose } from 'redux';
 
 import injectSaga from 'utils/injectSaga';
 import injectReducer from 'utils/injectReducer';
-import makeSelectWatherForm from './selectors';
+import makeSelectWeatherForm from './selectors';
 import reducer from './reducer';
 import saga from './saga';
-import { getWather } from './actions';
+import { getWeather } from './actions';
 
 /* eslint-disable react/prefer-stateless-function */
-export class WatherForm extends React.PureComponent {
+export class WeatherForm extends React.PureComponent {
   componentDidMount() {
-    console.log('this props from WatherForm:', this.props);
-    // this.props.getWather();
+    console.log(
+      'this props from WeatherForm:',
+      this.props,
+      this.props.getWeather(),
+    );
+    this.props.getWeather();
   }
 
   render() {
     return (
-      <form onClick={this.props.getMyWather}>
+      <form>
         <div className="form-group">
           <input type="text" name="city" className="" />
           <button className="btn btn-primary" type="button">
-            Get wather
+            Get weather
           </button>
         </div>
       </form>
@@ -32,18 +36,16 @@ export class WatherForm extends React.PureComponent {
   }
 }
 
-WatherForm.propTypes = {
-  // getWather: PropTypes.func.isRequired,
-  getMyWather: PropTypes.func.isRequired,
+WeatherForm.propTypes = {
+  getWeather: PropTypes.func.isRequired,
+  // getMyWeather: PropTypes.func.isRequired,
 };
 
-const mapStateToProps = createStructuredSelector({
-  watherForm: makeSelectWatherForm(),
-});
+const mapStateToProps = makeSelectWeatherForm();
 
 function mapDispatchToProps(dispatch) {
   return {
-    getWather: () => dispatch(getWather()),
+    getWeather: () => dispatch(getWeather()),
   };
 }
 
@@ -52,11 +54,11 @@ const withConnect = connect(
   mapDispatchToProps,
 );
 
-const withReducer = injectReducer({ key: 'watherForm', reducer });
-const withSaga = injectSaga({ key: 'watherForm', saga });
+const withReducer = injectReducer({ key: 'weatherForm', reducer });
+const withSaga = injectSaga({ key: 'weatherForm', saga });
 
 export default compose(
   withReducer,
   withSaga,
   withConnect,
-)(WatherForm);
+)(WeatherForm);
